@@ -1,0 +1,46 @@
+<div class="form-container">
+	<h2 mat-dialog-title>Add User amount</h2>
+	<mat-dialog-content>
+		<form [formGroup]="form">
+			<mat-form-field class="input-field" appearance="standard">
+				<mat-label>Name</mat-label>
+				<input matInput placeholder="Enter name" formControlName="name" />
+				<mat-error *ngIf="form.controls['name'].hasError('required')">
+					Name is required
+				</mat-error>
+				<mat-error *ngIf="form.controls['name'].hasError('blankString')">
+					Space not allowed in the start of name
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="input-field" appearance="standard">
+				<mat-label>Amount</mat-label>
+				<input
+					type="number"
+					matInput
+					placeholder="amount"
+					formControlName="amount"
+				/>
+				<mat-error *ngIf="form.controls['amount'].hasError('required')">
+					Amount is required
+				</mat-error>
+				<mat-error *ngIf="form.controls['amount'].hasError('isNumber')">
+					Only Positive Numbers allowed
+				</mat-error>
+			</mat-form-field>
+		</form>
+	</mat-dialog-content>
+	<mat-dialog-actions>
+		<button mat-raised-button (click)="dialogRef.close(false)" color="accent">
+			Close
+		</button>
+		<button
+			mat-raised-button
+			color="primary"
+			[disabled]="!form.valid"
+			(click)="submit(form.value)"
+		>
+			Submit
+		</button>
+	</mat-dialog-actions>
+</div>

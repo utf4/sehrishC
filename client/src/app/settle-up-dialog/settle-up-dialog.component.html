@@ -1,0 +1,51 @@
+<div>
+	<h2>Equal shares: {{ dialogData.equalShare | number: '.2-2' }}</h2>
+	<h2>Total: {{ dialogData.total }}</h2>
+	<mat-form-field>
+		<mat-label>Filter</mat-label>
+		<input
+			matInput
+			(keyup)="applyFilter($event)"
+			placeholder="Ex. Mia"
+			#input
+		/>
+	</mat-form-field>
+
+	<div class="mat-elevation-z8">
+		<table mat-table [dataSource]="dataSource" matSort>
+			<ng-container matColumnDef="id">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+				<td mat-cell *matCellDef="let row">1</td>
+			</ng-container>
+
+			<ng-container matColumnDef="owes">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Owes</th>
+				<td mat-cell *matCellDef="let row">{{ row.owes }}</td>
+			</ng-container>
+
+			<ng-container matColumnDef="owed">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Owed</th>
+				<td mat-cell *matCellDef="let row">{{ row.owed }}</td>
+			</ng-container>
+
+			<ng-container matColumnDef="amount">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+				<td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+			<tr class="mat-row" *matNoDataRow>
+				<td class="mat-cell" colspan="4">
+					No data matching the filter "{{ input.value }}"
+				</td>
+			</tr>
+		</table>
+
+		<mat-paginator
+			[pageSizeOptions]="[10, 25, 100]"
+			aria-label="Select page of users"
+		></mat-paginator>
+	</div>
+</div>

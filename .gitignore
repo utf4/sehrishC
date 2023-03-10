@@ -1,0 +1,5 @@
+.idea
+.client/node_modules
+.client/.eslintrc.json
+.client/.eslintcache
+node_modules
